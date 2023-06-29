@@ -8,10 +8,10 @@ import { ContactPageComponent } from './shared/pages/contact-page/contact-page.c
 
 const routes: Routes = [
   // Ruta para ir al home
-  {
-    path: '',
-    component: HomePageComponent
-  },
+  // {
+  //   path: '',
+  //   component: HomePageComponent
+  // },
   // Ruta para ir al about
   {
     path: 'about',
@@ -21,10 +21,16 @@ const routes: Routes = [
     path: 'contact',
     component: ContactPageComponent
   },
+  //Lazyload, carga peresoza, consiste en que sera un apartado de enrutamiento donde cargara solamente cuando se acceda en el
+  //por eso no se encuentra conectado directamente conectado al app.modulo, es un modulo encapsulado
+  {
+    path: 'countries',
+    loadChildren: () => import('./countries/countries.module').then( modulo => modulo.CountriesModule)
+  },
   //cualquiera ruta que no sean las existente nos redirigiran al home
   {
     path: '**',
-    redirectTo: ''
+    redirectTo: 'countries'
   },
 
 
