@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable, catchError, of } from 'rxjs';
+import { Observable, catchError, map, of } from 'rxjs';
 import { Country } from '../interfaces/country';
 
 @Injectable({
@@ -11,6 +11,17 @@ export class CountriesService {
   constructor(private http: HttpClient) {}
 
   private apiUrl: string = 'https://restcountries.com/v3.1';
+  searchCountrylById(code: string): Observable <Country | null> {
+    const url =`${this.apiUrl}/alpha/${code}`;
+
+    return this.http.get<Country[]>(url)
+    .pipe(
+      //map sirve para transformar la informacion
+      //si countries.legth es mayor a 0, muestra el de la posicio 0, si no muestra null
+      map(countries => countries.length > 0 ? countries[0]: null),
+      catchError(() => of(null))
+    );
+  }
 
   //Este servicio retornara un observable de tipo country interface, por ende tanto la funcion como lo que retorne deben ser
   //de tipo Country
@@ -38,5 +49,7 @@ export class CountriesService {
       catchError(error => of([]))
     );
   }
+
+
 
 }

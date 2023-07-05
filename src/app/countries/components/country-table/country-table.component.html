@@ -34,10 +34,11 @@
         <td>
           {{country.population | number}}
         </td>
+        <td>
+          <a [routerLink]="['/countries/by', country.cca3]">Ver más</a>
+        </td>
       </tr>
-      <td>
-        <a href="#">Ver más</a>
-      </td>
+      
     </tbody>
   </table>
 </ng-template>
