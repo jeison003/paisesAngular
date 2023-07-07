@@ -13,15 +13,19 @@ export class ByCapitalPageComponent {
   constructor(private countryService: CountriesService){}
 
   public countries: Country[] = [];
+  public isLoading: boolean = false;
+
 
   @Output()
   public placeholder: string = 'Buscar por capital'
-  
+
 
   searchByCapital(term: string):void {
+    this.isLoading = true;
    this.countryService.searchCapital(term)
    .subscribe(countries => {
     this.countries = countries;
+    this.isLoading = false;
    })
   }
 }

@@ -18,6 +18,8 @@
 <!-- Tabla de resultado -->
 <hr>
 <ul>
+  <!-- Si es false no muestra el componente, si es true muestra el componente, solo es true cuando se ejecuta la funcion searchByCapital -->
+  <shared-loading-spinner *ngIf="isLoading"></shared-loading-spinner>
   <countries-table [countries]="countries"></countries-table>
 </ul>
   </div>
