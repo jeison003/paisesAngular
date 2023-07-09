@@ -1,4 +1,9 @@
 /* You can add global styles to this file, and also import other style files */
+@media (min-width: 319px) and (max-width: 575px) {
+  body{
+    height: 100vh;
+  }
+}
 body {
   overflow-x: hidden;
 }
