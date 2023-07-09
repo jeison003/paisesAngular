@@ -1,6 +1,13 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { CountriesService } from '../../services/countries.service';
 import { Country } from '../../interfaces/country';
+import { Subscription } from 'rxjs';
+import { Region } from '../../interfaces/region.type';
+
+
+//LA variable tipo Type, es como la interface, pero no es escalable
+//Region solo tiene permitido identificar esas 5 palabras
+
 
 @Component({
   selector: 'app-by-region-page',
@@ -8,16 +15,32 @@ import { Country } from '../../interfaces/country';
   styles: [
   ]
 })
-export class ByRegionPageComponent {
+export class ByRegionPageComponent implements OnInit,OnDestroy {
 
   constructor(private countriesService: CountriesService){}
 
-  public region: Country[] = [];
+  ngOnInit(): void {
+   this.region = this.countriesService.cacheStore.byRegion.countries;
+   this.regionSelected = this.countriesService.cacheStore.byRegion.region;
+  }
 
-  searchByRegion(term: string):void{
-    this.countriesService.searchRegion(term)
+  public region: Country[] = [];
+  public isLoading: boolean = false;
+  public regions: Region[] = ['Africa','Americas','Asia','Europe','Oceania'];
+  public regionSelected?: Region;
+  private requestSuscription?: Subscription;
+
+  ngOnDestroy(): void {
+    this.requestSuscription?.unsubscribe();
+  }
+
+  searchByRegion(term: Region):void{
+    this.regionSelected = term;
+    this.isLoading = true;
+    this.requestSuscription = this.countriesService.searchRegion(term)
     .subscribe(region =>{
       this.region = region;
+      this.isLoading = false;
     } )
 
   }

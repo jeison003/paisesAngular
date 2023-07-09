@@ -1,6 +1,8 @@
-
+<!-- (keyup.enter)="OnvalueTag(txtSearchInput.value)" -->
+<!-- [value] es la propiedad para escribir un valor en el input-->
 <input type="text"
  [placeholder]="placeholder"
- class="form-control"
- (keyup.enter)="OnvalueTag(txtSearchInput.value)"
+ [value]="initialValue"
+ class="form-control "
+(keyup)="OnkeyPress(txtSearchInput.value)"
  #txtSearchInput>

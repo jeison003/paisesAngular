@@ -1,26 +1,28 @@
+<div class="container">
 
-<h2>Por Capital</h2>
-<hr>
 
-<div class="row">
-  <div class="col">
-  <!-- SearchBox -->
-    <shared-searchBox
-    [placeholder] = "placeholder"
-    (tagSearchEmit) = "searchByCapital($event)"
-    ></shared-searchBox>
+  <h2>Por Capital</h2>
+  <hr>
 
+  <div class="row">
+    <div class="col ">
+      <!-- SearchBox -->
+      <!-- (tagSearchEmit) = "searchByCapital($event)" -->
+      <shared-searchBox [initialValue]="initialValue" placeholder="Buscar pais"
+        (onDeounceTag)="searchByCapital($event)"></shared-searchBox>
+
+    </div>
   </div>
-</div>
 
-<div class="row">
-  <div class="col">
-<!-- Tabla de resultado -->
-<hr>
-<ul>
-  <!-- Si es false no muestra el componente, si es true muestra el componente, solo es true cuando se ejecuta la funcion searchByCapital -->
-  <shared-loading-spinner *ngIf="isLoading"></shared-loading-spinner>
-  <countries-table [countries]="countries"></countries-table>
-</ul>
+  <div class="row ">
+    <div class="col d-flex justify-content-start align-items-start  ">
+      <!-- Tabla de resultado -->
+      <hr>
+      <ul class="withOutMgPg">
+        <!-- Si es false no muestra el componente, si es true muestra el componente, solo es true cuando se ejecuta la funcion searchByCapital -->
+        <shared-loading-spinner *ngIf="isLoading"></shared-loading-spinner>
+        <countries-table [countries]="countries"></countries-table>
+      </ul>
+    </div>
   </div>
 </div>
