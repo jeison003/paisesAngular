@@ -12,8 +12,7 @@ import { Region } from '../../interfaces/region.type';
 @Component({
   selector: 'app-by-region-page',
   templateUrl: './by-region-page.component.html',
-  styles: [
-  ]
+  styleUrls: ['./by-region-page.component.css']
 })
 export class ByRegionPageComponent implements OnInit,OnDestroy {
 

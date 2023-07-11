@@ -3,42 +3,42 @@
 </div>
 
 
-<ng-template #table>
-  <table class="table table-hover">
+<ng-template #table  >
+  <table class="table table-hover tableRes">
     <thead>
       <tr>
-        <th>#</th>
-        <th>Icon</th>
-        <th>Bandera</th>
-        <th>Nombre</th>
-        <th>Capital</th>
-        <th>Poblacion</th>
+        <th class="withNm">#</th>
+        <th class="withIco">Icon</th>
+        <th class="widthFlag">Bandera</th>
+        <th class="widthName">Nombre</th>
+        <th class="widthCapital">Capital</th>
+        <th class="widthTH">Poblacion</th>
         <th></th>
       </tr>
     </thead>
     <tbody>
       <tr *ngFor="let country of countries; let i = index">
-        <td>{{i+1}}</td>
+        <td >{{i+1}}</td>
         <td>
             {{country.flag}}
         </td>
-        <td>
+        <td class="widthFlag">
           <img [src]="country.flags.svg" [alt]="country.name.common">
         </td>
-        <td>
+        <td class="text-wrap widthName">
           {{country.name.common}}
         </td>
-        <td>
+        <td class="text-wrap widthCapital">
           {{country.capital}}
         </td>
-        <td>
+        <td class="text-wrap widthTH">
           {{country.population | number}}
         </td>
         <td>
-          <a [routerLink]="['/countries/by', country.cca3]">Ver más</a>
+          <a [routerLink]="['/countries/by', country.cca3]">Info</a>
         </td>
       </tr>
-      
+
     </tbody>
   </table>
 </ng-template>

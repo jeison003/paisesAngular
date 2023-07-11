@@ -1,11 +1,10 @@
-<div class="container">
+<div class="ms-sm-2 responsiveContentXS ">
 
-
-  <h2>Por Capital</h2>
+  <h2 class="text-center">Por Capital</h2>
   <hr>
 
-  <div class="row">
-    <div class="col ">
+  <div class="row RowXs ">
+    <div class="colcolRes ">
       <!-- SearchBox -->
       <!-- (tagSearchEmit) = "searchByCapital($event)" -->
       <shared-searchBox [initialValue]="initialValue" placeholder="Buscar pais"
@@ -14,14 +13,14 @@
     </div>
   </div>
 
-  <div class="row ">
-    <div class="col d-flex justify-content-start align-items-start  ">
+  <div class="row RowXs">
+    <div class="col withOutMgPg ms-2">
       <!-- Tabla de resultado -->
       <hr>
-      <ul class="withOutMgPg">
+      <ul class="withOutMgPg  ">
         <!-- Si es false no muestra el componente, si es true muestra el componente, solo es true cuando se ejecuta la funcion searchByCapital -->
         <shared-loading-spinner *ngIf="isLoading"></shared-loading-spinner>
-        <countries-table [countries]="countries"></countries-table>
+        <countries-table [countries]="countries" ></countries-table>
       </ul>
     </div>
   </div>

@@ -1,13 +1,19 @@
 
 @media (min-width: 319px) and (max-width: 575px) {
-  .view{
-    width: 100vh;
+  .respons{
+    min-width: 320px;
   }
+  .component{
+    width: 320px;
+
+  }
+ 
 }
 
 .page{
   position: relative;
   min-height: 100vh;
   padding-bottom: 10.5rem;
+
 }
 
