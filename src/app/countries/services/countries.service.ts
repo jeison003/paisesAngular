@@ -10,11 +10,12 @@ import { Region } from '../interfaces/region.type';
 })
 export class CountriesService {
 
-  constructor(private http: HttpClient) {
+  constructor(
+
+    private http: HttpClient,
+    ) {
     this.loadFromLocalStorage();
   }
-
-  private apiUrl: string = 'https://restcountries.com/v3.1';
 
   public cacheStore: CacheStore = {
     byCapital: {term: '', countries: []},
@@ -45,7 +46,7 @@ export class CountriesService {
 
   //servicio que busca el pais por el id del url
   searchCountrylById(code: string): Observable <Country | null> {
-    const url =`${this.apiUrl}/alpha/${code}`;
+    const url =`/alpha/${code}`;
 // Pipe es un transformador, el catchError toma el error y con un of que es un observador of(variable) lo retorna en un arreglo vacio
     return this.http.get<Country[]>(url)
     .pipe(
@@ -59,7 +60,7 @@ export class CountriesService {
   //Este servicio retornara un observable de tipo country interface, por ende tanto la funcion como lo que retorne deben ser
   //de tipo Country
   searchCapital(term: string): Observable <Country[]> {
-    const url =`${this.apiUrl}/capital/${term}`;
+    const url =`/capital/${term}`;
     return this.getCountriesRequest(url)
     .pipe(
       //El tap no va a influir en el funcionamiento de la peticion, lo usamos en este caso para guardar la informacion
@@ -72,7 +73,7 @@ export class CountriesService {
   }
 
   searchCountry(term: string): Observable <Country[]> {
-    const url =`${this.apiUrl}/name/${term}`;
+    const url =`/name/${term}`;
     return this.getCountriesRequest(url)
     .pipe(
       tap(countries => this.cacheStore.byCountries = {term: term, countries: countries}),
@@ -81,7 +82,7 @@ export class CountriesService {
   }
 
   searchRegion(term: Region): Observable <Country[]> {
-    const url =`${this.apiUrl}/region/${term}`;
+    const url =`/region/${term}`;
     return this.getCountriesRequest(url)
     .pipe(
       tap(countries => this.cacheStore.byRegion = {region: term, countries: countries}),
@@ -89,6 +90,13 @@ export class CountriesService {
     )
   }
 
+  interceptorApi(term: string): Observable <Country[]>{
+
+    return this.http.get<Country[]>(term)
+    .pipe(
+      catchError(error => of([])),
+    );
+  }
 
 
 }
